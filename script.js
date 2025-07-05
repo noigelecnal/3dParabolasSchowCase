@@ -11,8 +11,11 @@ function init() {
   renderer.setSize(window.innerWidth, window.innerHeight);
   document.body.appendChild(renderer.domElement);
 
-  controls = new THREE.OrbitControls(camera, renderer.domElement);
-  controls.enableDamping = true;
+  controls = new THREE.FlyControls(camera, renderer.domElement);
+  controls.movementSpeed = 10;
+  controls.rollSpeed = Math.PI / 24;
+  controls.autoForward = false;
+  controls.dragToLook = true;
 
   const light = new THREE.HemisphereLight(0xffffff, 0x444444);
   light.position.set(0, 20, 0);
@@ -23,7 +26,7 @@ function init() {
 
 function animate() {
   requestAnimationFrame(animate);
-  controls.update();
+  controls.update(0.05); // delta for FlyControls
   renderer.render(scene, camera);
 }
 
@@ -52,12 +55,24 @@ function showModel(modelName) {
     fileName = 'gateway_arch.glb';
   }
 
-  console.log('Loading model:', fileName); // Debug filename loading
+  console.log('Loading model:', fileName);
 
   loader.load(fileName, function(gltf) {
     currentModel = gltf.scene;
+    currentModel.position.set(0, 0, 0);
+    currentModel.rotation.set(0, 0, 0);
+    currentModel.scale.set(1, 1, 1);
+
+    const box = new THREE.Box3().setFromObject(currentModel);
+    const center = box.getCenter(new THREE.Vector3());
+    currentModel.position.sub(center);
+
+    const size = box.getSize(new THREE.Vector3()).length();
+    const scale = 5 / size;
+    currentModel.scale.set(scale, scale, scale);
+
     scene.add(currentModel);
-    console.log(fileName + ' loaded successfully');
+    console.log(fileName + ' loaded and centered successfully');
   }, function(xhr) {
     console.log((xhr.loaded / xhr.total * 100) + '% loaded');
   }, function(error) {
