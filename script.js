@@ -5,7 +5,7 @@ init();
 function init() {
   scene = new THREE.Scene();
   camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
-  camera.position.set(0, 0, 0);
+  camera.position.set(0, 2, 5);
 
   renderer = new THREE.WebGLRenderer({antialias: true});
   renderer.setSize(window.innerWidth, window.innerHeight);
@@ -48,8 +48,6 @@ function showModel(modelName) {
     fileName = 'golden_gate_bridge.glb';
   } else if (modelName === 'coaster') {
     fileName = 'roller_coaster.glb';
-  } else if (modelName === 'gateway') {
-    fileName = 'gateway_arch.glb';
   }
 
   console.log('Loading model:', fileName);
