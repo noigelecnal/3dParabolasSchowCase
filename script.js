@@ -49,6 +49,9 @@ function showModel(modelName) {
   } else if (modelName === 'coaster') {
     fileName = 'roller_coaster.glb';
   }
+    else if (modelName === 'gateway') {
+    fileName = 'gateway_arch.glb';
+  }
 
   loader.load(fileName, function(gltf) {
     currentModel = gltf.scene;
