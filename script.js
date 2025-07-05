@@ -48,16 +48,20 @@ function showModel(modelName) {
     fileName = 'golden_gate_bridge.glb';
   } else if (modelName === 'coaster') {
     fileName = 'roller_coaster.glb';
+  } else if (modelName === 'gateway') {
+    fileName = 'gateway_arch.glb';
   }
-    else if (modelName === 'gateway') {
-    fileName = 'gateway_arch_1.glb';
-  }
+
+  console.log('Loading model:', fileName); // Debug filename loading
 
   loader.load(fileName, function(gltf) {
     currentModel = gltf.scene;
     scene.add(currentModel);
-  }, undefined, function(error) {
-    console.error(error);
+    console.log(fileName + ' loaded successfully');
+  }, function(xhr) {
+    console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+  }, function(error) {
+    console.error('An error happened while loading', fileName, error);
   });
 }
 
