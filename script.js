@@ -47,7 +47,7 @@ function showModel(modelName) {
   } else if (modelName === 'bridge') {
     fileName = 'golden_gate_bridge.glb';
   } else if (modelName === 'coaster') {
-    fileName = 'roller_coaster.glb';
+    fileName = 'roller_coaster1.glb';
   }
     else if (modelName === 'gateway') {
     fileName = 'gateway_arch.glb';
