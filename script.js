@@ -54,26 +54,9 @@ function showModel(modelName) {
 
   loader.load(fileName, function(gltf) {
     currentModel = gltf.scene;
-    currentModel.position.set(0, 0, 0);
-    currentModel.rotation.set(0, 0, 0);
-    currentModel.scale.set(1, 1, 1);
-
-    const box = new THREE.Box3().setFromObject(currentModel);
-    const center = box.getCenter(new THREE.Vector3());
-    currentModel.position.sub(center);
-
-    const size = box.getSize(new THREE.Vector3()).length();
-    const scale = 5 / size;
-    currentModel.scale.set(scale, scale, scale);
-
-    // Adjustment specifically for roller coaster to bring it closer
-    if (modelName === 'coaster') {
-      currentModel.position.z += 2; // move forward
-      currentModel.position.y += 1; // raise slightly if needed
-    }
 
     scene.add(currentModel);
-    console.log(fileName + ' loaded, centered, and adjusted successfully');
+    console.log(fileName + ' loaded successfully');
   }, function(xhr) {
     console.log((xhr.loaded / xhr.total * 100) + '% loaded');
   }, function(error) {
