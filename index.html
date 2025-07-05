@@ -3,19 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Parabolas in Real Life - 3D Showcase</title>
+<title>Parabolas in Real Life - Interactive Showcase</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div id="buttons">
-<button onclick="showModel('parabola')">Parabola Curve</button>
 <button onclick="showModel('satellite')">Satellite Dish</button>
-<button onclick="showModel('fountain')">Fountain Arc</button>
+<button onclick="showModel('fountain')">Fountain</button>
+<button onclick="showModel('bridge')">Bridge Arch</button>
 </div>
-<div id="description">Select a model to see how parabolas appear in real life.</div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128/examples/js/controls/OrbitControls.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128/examples/js/loaders/GLTFLoader.js"></script>
+<div id="modelContainer">
+<iframe id="sketchfabViewer" src="" width="100%" height="600" frameborder="0" allowfullscreen></iframe>
+</div>
 <script src="script.js"></script>
 </body>
 </html>
