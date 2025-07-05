@@ -11,11 +11,8 @@ function init() {
   renderer.setSize(window.innerWidth, window.innerHeight);
   document.body.appendChild(renderer.domElement);
 
-  controls = new THREE.FlyControls(camera, renderer.domElement);
-  controls.movementSpeed = 10;
-  controls.rollSpeed = Math.PI / 24;
-  controls.autoForward = false;
-  controls.dragToLook = true;
+  controls = new THREE.OrbitControls(camera, renderer.domElement);
+  controls.enableDamping = true;
 
   const light = new THREE.HemisphereLight(0xffffff, 0x444444);
   light.position.set(0, 20, 0);
@@ -26,7 +23,7 @@ function init() {
 
 function animate() {
   requestAnimationFrame(animate);
-  controls.update(0.05); // delta for FlyControls
+  controls.update();
   renderer.render(scene, camera);
 }
 
