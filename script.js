@@ -66,8 +66,14 @@ function showModel(modelName) {
     const scale = 5 / size;
     currentModel.scale.set(scale, scale, scale);
 
+    // Adjustment specifically for roller coaster to bring it closer
+    if (modelName === 'coaster') {
+      currentModel.position.z += 2; // move forward
+      currentModel.position.y += 1; // raise slightly if needed
+    }
+
     scene.add(currentModel);
-    console.log(fileName + ' loaded and centered successfully');
+    console.log(fileName + ' loaded, centered, and adjusted successfully');
   }, function(xhr) {
     console.log((xhr.loaded / xhr.total * 100) + '% loaded');
   }, function(error) {
