@@ -9,7 +9,6 @@
 </head>
 <body>
 
-  <audio id="click-sound" src="button.ogg" preload="auto"></audio>
   <audio id="hover-sound" src="cancel.ogg" preload="auto"></audio>
 
   <div id="buttons">
@@ -54,7 +53,7 @@
       "susunugin ko alaala mo hanggang sa malimot ka ang lahat-lahat sa 'yo ako na'ng lalayo",
       "tayo na lang dalawa tayo na lang magsama tayo na lang dalawa tayo naman talaga tayo na lang dalawa tayo na lang magsama tayo na lang dalawa tayo naman talaga",
       "sana, sana naman ay mapa-mapagbigyan na at nang mapakinggan ang tibok ng puso kong sa 'yo lang",
-      "baby, I am a wreck when I'm without you i need you here to stay i broke all my bones that day I found you crying at the lake",
+      "baby, I am a wreck when I'm without you i need you here to stay i broke all my bones that day I found you crying at the lake"
     ];
 
     const footerText = document.getElementById('footerText');
@@ -80,14 +79,23 @@
     refreshButton.addEventListener('click', setRandomFooter);
     setRandomFooter();
 
-    const clickSound = document.getElementById('click-sound');
     const hoverSound = document.getElementById('hover-sound');
+
+  
+    const clickSoundFiles = ['button.ogg', 'button2.ogg'];
+    function playRandomClickSound() {
+      const src = clickSoundFiles[Math.floor(Math.random() * clickSoundFiles.length)];
+      const audio = new Audio(src); 
+      audio.volume = 1;
+      audio.playbackRate = 0.95 + Math.random() * 0.1;
+      audio.play().catch(e => {
+        
+      });
+    }
 
     document.querySelectorAll('#buttons button').forEach(button => {
       const handlePress = () => {
-        const sound = clickSound.cloneNode(true);
-        sound.playbackRate = 0.95 + Math.random() * 0.1;
-        sound.play();
+        playRandomClickSound(); 
 
         button.classList.remove('balatro-tilt-shake-click');
         void button.offsetWidth;
@@ -97,12 +105,11 @@
         showModel(modelName);
       };
 
+      button.addEventListener('mousedown', handlePress); 
       button.addEventListener('touchstart', e => {
-        e.preventDefault(); 
+        e.preventDefault();
         handlePress();
       });
-
-      button.addEventListener('click', handlePress);
 
       button.addEventListener('mouseenter', () => {
         const sound = hoverSound.cloneNode(true);
@@ -110,10 +117,16 @@
         sound.play();
         button.classList.add('hover-grow');
       });
+
       button.addEventListener('mouseleave', () => {
         button.classList.remove('hover-grow');
       });
     });
+
+
+    function showModel(modelName) {
+      console.log(`Showing model: ${modelName}`);
+    }
   </script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
