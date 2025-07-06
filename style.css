@@ -14,7 +14,6 @@ body {
   overflow: hidden;
 }
 
-/* Buttons container centered horizontally, wraps on small screens */
 #buttons {
   margin: 10px;
   z-index: 1;
@@ -116,7 +115,7 @@ button:hover {
   user-select: none;
 }
 
-/* Mobile adjustments */
+
 @media (max-width: 600px) {
   button {
     font-size: 14px;
