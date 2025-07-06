@@ -12,8 +12,37 @@
   <button onclick="showModel('bridge')">Golden Gate Bridge</button>
   <button onclick="showModel('coaster')">Roller Coaster</button>
 </div>
+
+<div id="footer"></div>
+
+<script>
+  const footerTexts = [
+    "hanggang kailan ako maghihintay na makasama kang muli",
+    "halika na, sumama ka, pagmasdan ang mga tala",
+    "kahit sa'n man mapunta ay anino mo'y kumakapit sa 'king kamay",
+    "tumingin ka sa 'king mga mata at hindi mo na kailangan pang magtanong nang paulit-ulit, ikaw lang ang iniibig",
+    "ibuhos na ang beer sa aking lalamunan upang malunod na ang puso kong nahihirapan",
+    "at natapos ang himas ng sandal 'di kukubli aking tinig nang lumipas na't 'di man lang nasabi salamat hanggang sa muli",
+  ];
+
+  const footer = document.getElementById('footer');
+  const text = footerTexts[Math.floor(Math.random() * footerTexts.length)];
+
+  let i = 0;
+  function typeWriter() {
+    if (i < text.length) {
+      footer.textContent += text.charAt(i);
+      i++;
+      setTimeout(typeWriter, 1);
+    }
+  }
+
+  typeWriter();
+</script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128/examples/js/controls/OrbitControls.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128/examples/js/loaders/GLTFLoader.js"></script>
 <script src="script.js"></script>
 </body>
+</html>
