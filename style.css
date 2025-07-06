@@ -2,6 +2,7 @@
   font-family: "balato";
   src: url('m6x11plus.ttf') format('truetype');
 }
+
 body {
   margin: 0;
   font-family: "yes", sans-serif;
@@ -12,35 +13,64 @@ body {
   align-items: center;
   overflow: hidden;
 }
+
+/* Buttons container centered horizontally, wraps on small screens */
 #buttons {
   margin: 10px;
   z-index: 1;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 600px;
+  padding: 0 10px;
+  box-sizing: border-box;
 }
+
 button {
   font-family: "balato", sans-serif;
   margin: 5px;
   padding: 10px 15px;
   font-size: 16px;
   background: #6b0000;
-  color: rgb(255, 255, 255);
+  color: white;
   border: none;
   border-radius: 60px;
   cursor: pointer;
-  transition: background .2s ease, transform 0.1s ease;
+  transition: background 0.2s ease, transform 0.2s ease;
+  min-width: 120px;
+  text-align: center;
+  user-select: none;
+}
+
+button.hover-grow {
+  transform: scale(1.3);
 }
 
 button:hover {
   background: #ff0000;
-  transform: scale(1.3); 
+  transform: scale(1.3);
 }
-canvas {
-  display: block;
+
+@keyframes balatro-microshake {
+  0%   { transform: scale(1.3) translate(0px, 0px) rotate(0deg); }
+  10%  { transform: scale(1.3) translate(-1px, 1px) rotate(-10deg); }
+  70%  { transform: scale(1.3) translate(0.5px, -0.5px) rotate(0.4deg); }
+  80%  { transform: scale(1.3) translate(1px, -1px) rotate(-3deg); }
+  84%  { transform: scale(1.3) translate(-0.3px, 0.3px) rotate(.6deg); }
+  100% { transform: scale(1.3) translate(0px, 0px) rotate(0deg); }
 }
+
+.balatro-tilt-shake-click {
+  animation: balatro-microshake 0.3s steps(2, end);
+}
+
 #footer {
   font-family: "balato", sans-serif;
   font-size: 10px;
   color: #ccc;
-  padding: 0px;
+  padding: 0;
   text-align: center;
   position: fixed;
   bottom: 0;
@@ -50,7 +80,6 @@ canvas {
   justify-content: center;
   align-items: center;
   gap: 8px;
-  overflow: hidden;
 }
 
 #refreshFooter {
@@ -63,20 +92,42 @@ canvas {
   border-radius: 4px;
   cursor: pointer;
   transition: background 0.3s ease;
-  overflow: hidden;
+
+  min-width: auto;    
+  width: auto;       
+  height: auto;      
+  line-height: normal;
+  transform: none !important; 
 }
 
 #refreshFooter:hover {
   background: #555;
 }
+
 #middle-image {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 300px; 
-  opacity: .05; 
-  pointer-events: none; 
-  z-index: 0; 
+  width: 300px;
+  opacity: .05;
+  pointer-events: none;
+  z-index: 0;
   user-select: none;
+}
+
+/* Mobile adjustments */
+@media (max-width: 600px) {
+  button {
+    font-size: 14px;
+    padding: 12px 20px;
+    min-width: 140px;
+    transform: scale(1.1);
+  }
+  button.hover-grow, button:hover {
+    transform: scale(1.1) !important;
+  }
+  #buttons {
+    gap: 8px;
+  }
 }
