@@ -9,27 +9,22 @@
 </head>
 <body>
 
-  <!-- Sounds -->
   <audio id="click-sound" src="button.ogg" preload="auto"></audio>
   <audio id="hover-sound" src="cancel.ogg" preload="auto"></audio>
 
-  <!-- Buttons -->
   <div id="buttons">
     <button data-model="satellite">Satellite Dish</button>
     <button data-model="bridge">Golden Gate Bridge</button>
     <button data-model="coaster">Roller Coaster</button>
   </div>
 
-  <!-- Footer -->
   <div id="footer">
     <span id="footerText"></span>
     <button id="refreshFooter">↻</button>
   </div> 
 
-  <!-- Center Image -->
   <img src="agasino.png" id="middle-image" alt="background image">
 
-  <!-- Scripts -->
   <script>
     const footerTexts = [
       "hanggang kailan ako maghihintay na makasama kang muli",
@@ -95,23 +90,20 @@
         sound.play();
 
         button.classList.remove('balatro-tilt-shake-click');
-        void button.offsetWidth; // force reflow
+        void button.offsetWidth;
         button.classList.add('balatro-tilt-shake-click');
 
-        // Placeholder for model loading
         const modelName = button.getAttribute('data-model');
         showModel(modelName);
       };
 
-      // Mobile + Desktop tap
       button.addEventListener('touchstart', e => {
-        e.preventDefault(); // prevent blue highlight
+        e.preventDefault(); 
         handlePress();
       });
 
       button.addEventListener('click', handlePress);
 
-      // Hover grow sound + grow on desktop only
       button.addEventListener('mouseenter', () => {
         const sound = hoverSound.cloneNode(true);
         sound.playbackRate = 0.98 + Math.random() * 0.04;
