@@ -8,27 +8,24 @@
 </head>
 <body>
 
-  <!-- AUDIO -->
   <audio id="click-sound" src="button.ogg" preload="auto"></audio>
   <audio id="hover-sound" src="cancel.ogg" preload="auto"></audio>
 
-  <!-- BUTTONS -->
+
   <div id="buttons">
     <button onclick="showModel('satellite')">Satellite Dish</button>
     <button onclick="showModel('bridge')">Golden Gate Bridge</button>
     <button onclick="showModel('coaster')">Roller Coaster</button>
   </div>
 
-  <!-- FOOTER -->
+
   <div id="footer">
     <span id="footerText"></span>
     <button id="refreshFooter">↻</button>
   </div>
 
-  <!-- BACKGROUND IMAGE -->
   <img src="agasino.jpg" id="middle-image" alt="background image">
 
-  <!-- MAIN LOGIC -->
   <script>
     const footerTexts = [
       "hanggang kailan ako maghihintay na makasama kang muli",
@@ -85,19 +82,18 @@
         sound.play();
 
         button.classList.remove('balatro-tilt-shake-click');
-        void button.offsetWidth; // force reflow to restart animation
+        void button.offsetWidth; 
         button.classList.add('balatro-tilt-shake-click');
       });
     });
 
-    // Placeholder for Three.js logic
+  
     function showModel(name) {
       console.log("Show model:", name);
-      // Fill with your Three.js loader logic
+    
     }
   </script>
 
-  <!-- THREE.JS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/three@0.128/examples/js/controls/OrbitControls.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/three@0.128/examples/js/loaders/GLTFLoader.js"></script>
