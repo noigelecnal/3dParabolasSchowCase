@@ -6,8 +6,62 @@
   <title>sure</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" href="agasino.png" type="image/png">
+
+  <style>
+    /* Loading screen overlay */
+    #loading-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #000000;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 99999;
+      font-family: sans-serif;
+      transition: opacity 2s ease;
+    }
+
+    /* Spinning image logo */
+    .loading-spinner {
+      width: 64px;
+      height: 64px;
+      animation: spin 5s linear infinite;
+      margin-bottom: 16px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    #refreshFooter.cooldown {
+      opacity: 0.5;
+      pointer-events: none;
+      cursor: not-allowed;
+    }
+
+    .pixel {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background-color: red;
+      pointer-events: none;
+      will-change: transform, opacity;
+      z-index: 9999;
+    }
+  </style>
 </head>
 <body>
+
+  <!-- Loading Screen -->
+  <div id="loading-screen">
+    <img src="agasino.png" class="loading-spinner" alt="Loading..." />
+    <p id="loading-text"></p>
+  </div>
 
   <audio id="hover-sound" src="cancel.ogg" preload="auto"></audio>
 
@@ -22,7 +76,7 @@
     <button id="refreshFooter">↻</button>
   </div> 
 
-  <img src="agasino.png" id="middle-image" alt="background image">
+  <img src="" id="middle-image" alt="">
 
   <script>
     const footerTexts = [
@@ -54,7 +108,7 @@
       "tayo na lang dalawa tayo na lang magsama tayo na lang dalawa tayo naman talaga tayo na lang dalawa tayo na lang magsama tayo na lang dalawa tayo naman talaga",
       "sana, sana naman ay mapa-mapagbigyan na at nang mapakinggan ang tibok ng puso kong sa 'yo lang",
       "baby, I am a wreck when I'm without you i need you here to stay i broke all my bones that day I found you crying at the lake"
-    ];
+  ]
 
     const footerText = document.getElementById('footerText');
     const refreshButton = document.getElementById('refreshFooter');
@@ -76,39 +130,46 @@
       typeWriter(text);
     }
 
-    refreshButton.addEventListener('click', setRandomFooter);
+    refreshButton.addEventListener('click', () => {
+      if (refreshButton.disabled) return;
+      setRandomFooter();
+      refreshButton.disabled = true;
+      refreshButton.classList.add('cooldown');
+      setTimeout(() => {
+        refreshButton.disabled = false;
+        refreshButton.classList.remove('cooldown');
+      }, 5000);
+    });
+
     setRandomFooter();
 
     const hoverSound = document.getElementById('hover-sound');
-
-  
     const clickSoundFiles = ['button.ogg', 'button2.ogg'];
+
     function playRandomClickSound() {
       const src = clickSoundFiles[Math.floor(Math.random() * clickSoundFiles.length)];
       const audio = new Audio(src); 
       audio.volume = 1;
       audio.playbackRate = 0.95 + Math.random() * 0.1;
-      audio.play().catch(e => {
-        
-      });
+      audio.play().catch(e => {});
     }
 
     document.querySelectorAll('#buttons button').forEach(button => {
-      const handlePress = () => {
-        playRandomClickSound(); 
-
+      const handlePress = (e) => {
+        playRandomClickSound();
+        pixelSplash(e.clientX, e.clientY);
         button.classList.remove('balatro-tilt-shake-click');
         void button.offsetWidth;
         button.classList.add('balatro-tilt-shake-click');
-
         const modelName = button.getAttribute('data-model');
         showModel(modelName);
       };
 
-      button.addEventListener('mousedown', handlePress); 
+      button.addEventListener('mousedown', handlePress);
       button.addEventListener('touchstart', e => {
         e.preventDefault();
-        handlePress();
+        const touch = e.touches[0];
+        handlePress(touch);
       });
 
       button.addEventListener('mouseenter', () => {
@@ -123,15 +184,87 @@
       });
     });
 
-
     function showModel(modelName) {
       console.log(`Showing model: ${modelName}`);
     }
+
+    function pixelSplash(x, y) {
+      const colors = ['#ffffff', '#ffffff', '#ffffff', '#ff0000', '#ff0000'];
+      for (let i = 0; i < 10; i++) {
+        const pixel = document.createElement('div');
+        pixel.className = 'pixel';
+        pixel.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        pixel.style.left = `${x}px`;
+        pixel.style.top = `${y}px`;
+        document.body.appendChild(pixel);
+
+        const angle = Math.random() * 2 * Math.PI;
+        const distance = 20 + Math.random() * 30;
+        const dx = Math.cos(angle) * distance;
+        const dy = Math.sin(angle) * distance;
+
+        pixel.animate([
+          { transform: 'translate(0, 0)', opacity: 1 },
+          { transform: `translate(${dx}px, ${dy}px)`, opacity: 0 }
+        ], {
+          duration: 500 + Math.random() * 200,
+          easing: 'ease-out'
+        });
+
+        setTimeout(() => {
+          pixel.remove();
+        }, 700);
+      }
+    }
+
+    // Loading messages
+    const loadingMessages = [
+      "kurt kian zamora walang ambag",
+      "i shall return",
+      "well well well",
+      "blessing in the sky",
+      "may kwento akiskis",
+      "if it works, dont touch it",
+      "kurt kian zamora walang ambag",
+      "one more game!!",
+      "galing",
+      "ok na 'to",
+      "skibidi",
+      "kurt kian zamora walang ambag",
+      "never cook again",
+      "HAHAHAHAHAH",
+      "listen look and listen and learn",
+    ];
+
+    function cycleLoadingTexts() {
+      const loadingText = document.getElementById("loading-text");
+      let index = Math.floor(Math.random() * loadingMessages.length);
+      loadingText.textContent = loadingMessages[index]; // initial message
+
+      setInterval(() => {
+        index = (index + 1) % loadingMessages.length;
+        loadingText.textContent = loadingMessages[index];
+      }, 1500);
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      cycleLoadingTexts();
+    });
+
+    window.addEventListener('load', () => {
+      const loader = document.getElementById('loading-screen');
+      if (loader) {
+        loader.style.opacity = '0';
+        setTimeout(() => loader.remove(), 500);
+      }
+    });
   </script>
 
+  <!-- 3D + extras -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/three@0.128/examples/js/controls/OrbitControls.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/three@0.128/examples/js/loaders/GLTFLoader.js"></script>
   <script src="script.js"></script>
+
 </body>
 </html>
