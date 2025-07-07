@@ -22,16 +22,16 @@
       align-items: center;
       justify-content: center;
       z-index: 99999;
-      font-family: sans-serif;
+      font-family: "balato", sans-serif;
+      font-size: 35px;
       transition: opacity 2s ease;
     }
-
     /* Spinning image logo */
     .loading-spinner {
-      width: 64px;
-      height: 64px;
+      width: 128px;
+      height: 128px;
       animation: spin 5s linear infinite;
-      margin-bottom: 16px;
+      margin-bottom: 0px;
     }
 
     @keyframes spin {
@@ -80,35 +80,35 @@
 
   <script>
     const footerTexts = [
-      "hanggang kailan ako maghihintay na makasama kang muli",
-      "halika na, sumama ka, pagmasdan ang mga tala",
-      "kahit sa'n man mapunta ay anino mo'y kumakapit sa 'king kamay",
-      "tumingin ka sa 'king mga mata at hindi mo na kailangan pang magtanong nang paulit-ulit, ikaw lang ang iniibig",
-      "ibuhos na ang beer sa aking lalamunan upang malunod na ang puso kong nahihirapan",
-      "at natapos ang himas ng sandali 'di kukubli aking tinig nang lumipas na't 'di man lang nasabi salamat hanggang sa muli",
-      "magbabalik ang nakaraan ibabalik ang pinagmulan umaasa, umaasa magbabalik ang nakaraan Ibabalik ang pinagmulan umaasa, umaasa",
-      "hm, 'di ba? nakaka########## tayo'y lumilipad, at ako'y iniwan mo oh, 'di ba? pinagmukha mo 'kong #####",
-      "no i dont have a gun",
-      "youve been locked in here forever, and you just cant say goodbye",
-      "i swear ill only make you cry",
-      "and when you go away, i still see you with sunlight on your face in my rearview",
-      "knowing that i love you, and running my fingers through your hair",
-      "are you sick of me? would you like to be? im t rying to you something something that i already said",
-      "because love can burn like a cigarette",
-      "and she cried over nothing so there was nothing i could stop her from cutting her beautiful blue hair off",
-      "winner takes it all",
-      "the loser standing small",
-      "slipping through my fingers all the time",
-      "you were always sure of yourself now I see you've broken a feather i hope we can patch it up together",
-      "i don't think that you even realize the joy you make me feel when i'm inside your universe",
-      "tulad ng mundong hindi tumitigil sa pag-ikot pag-ibig 'di mapapagod tulad ng ilog na hindi tumitigil sa pag-agos pag-ibig 'di matatapos",
-      "halika na at sumiping ka sa kama lasapin natin sarap ng pagsasama",
-      "pero 'wag mag-alala 'di na kita gagambalain pa alam ko namang ngayon may kapiling ka nang iba",
-      "susunugin ko alaala mo hanggang sa malimot ka ang lahat-lahat sa 'yo ako na'ng lalayo",
-      "tayo na lang dalawa tayo na lang magsama tayo na lang dalawa tayo naman talaga tayo na lang dalawa tayo na lang magsama tayo na lang dalawa tayo naman talaga",
-      "sana, sana naman ay mapa-mapagbigyan na at nang mapakinggan ang tibok ng puso kong sa 'yo lang",
-      "baby, I am a wreck when I'm without you i need you here to stay i broke all my bones that day I found you crying at the lake"
-  ]
+  "Hanggang kailan ako maghihintay na makasama kang muli?",
+  "Halika na, sumama ka. Pagmasdan ang mga tala.",
+  "Kahit saan man mapunta, ang anino mo'y kumakapit sa 'king kamay.",
+  "Tumingin ka sa aking mga mata, at hindi mo na kailangang magtanong nang paulit-ulit—ikaw lang ang iniibig.",
+  "Ibuhos na ang beer sa aking lalamunan upang malunod na ang pusong nahihirapan.",
+  "At natapos ang himas ng sandali. 'Di kukubli ang aking tinig nang lumipas na't 'di man lang nasabi: salamat, hanggang sa muli.",
+  "Magbabalik ang nakaraan, ibabalik ang pinagmulan. Umaasa... umaasa...",
+  "Hmm... 'Di ba? Nakaka#########. Tayo'y lumilipad—at ako'y iniwan mo. Oh, 'di ba? Pinagmukha mo akong tanga.",
+  "No, I don't have a gun.",
+  "You've been locked in here forever, and you just can't say goodbye.",
+  "I swear, I'll only make you cry.",
+  "And when you go away, I still see you—with sunlight on your face in my rearview.",
+  "Knowing that I love you, and running my fingers through your hair.",
+  "Are you sick of me? Would you like to be? I'm trying to say something... something that I already said.",
+  "Because love can burn like a cigarette.",
+  "And she cried over nothing, so there was nothing I could do to stop her from cutting her beautiful blue hair off.",
+  "The winner takes it all.",
+  "The loser standing small.",
+  "Slipping through my fingers all the time.",
+  "You were always sure of yourself. Now I see you've broken a feather. I hope we can patch it up together.",
+  "I don't think that you even realize the joy you make me feel when I'm inside your universe.",
+  "Tulad ng mundong hindi tumitigil sa pag-ikot, pag-ibig 'di mapapagod. Tulad ng ilog na hindi tumitigil sa pag-agos, pag-ibig 'di matatapos.",
+  "Halika na at sumiping ka sa kama. Lasapin natin ang sarap ng pagsasama.",
+  "Pero 'wag mag-alala, 'di na kita gagambalain pa. Alam ko namang ngayon may kapiling ka nang iba.",
+  "Susunugin ko ang alaala mo hanggang sa malimot ka—ang lahat-lahat sa'yo. Ako na ang lalayo.",
+  "Tayo na lang dalawa. Tayo na lang magsama. Tayo naman talaga.",
+  "Sana... sana naman ay mapagbigyan na, at nang mapakinggan ang tibok ng puso kong sa'yo lang.",
+  "Baby, I am a wreck when I'm without you. I need you here to stay. I broke all my bones that day I found you crying at the lake."
+]
 
     const footerText = document.getElementById('footerText');
     const refreshButton = document.getElementById('refreshFooter');
@@ -138,7 +138,7 @@
       setTimeout(() => {
         refreshButton.disabled = false;
         refreshButton.classList.remove('cooldown');
-      }, 5000);
+      }, 3000);
     });
 
     setRandomFooter();
@@ -234,6 +234,21 @@
       "never cook again",
       "HAHAHAHAHAH",
       "listen look and listen and learn",
+      "yung mga kaibigan mo",
+      "but it refused",
+      "sige lang",
+      "swaggalicious",
+      "time is money so buy a rolex",
+      "loading...",
+      "naglolog ka ata",
+      "loading...",
+      "naglolog ka ata",
+      "loading...",
+      "naglolog ka ata",
+      "loading...",
+      "naglolog ka ata",
+      "the man who sold the world",
+      
     ];
 
     function cycleLoadingTexts() {
