@@ -75,6 +75,24 @@ button:hover {
   animation: balatro-microshake .395s steps(50, end);
 }
 
+
+#loadingMessages {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: "balato", sans-serif;
+  font-size: 16px;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 6px 12px;
+  border-radius: 8px;
+  z-index: 10;
+  text-align: center;
+  user-select: none;
+  pointer-events: none;
+}
+
 #footer {
   font-family: "balato", sans-serif;
   font-size: 10px;
